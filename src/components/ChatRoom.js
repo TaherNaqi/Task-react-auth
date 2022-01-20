@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import MessageItem from "./MessageItem";
-import roomStore from "../roomStore";
+import roomStore from "../stores/roomStore";
 import { observer } from "mobx-react";
 
 function ChatRoom() {

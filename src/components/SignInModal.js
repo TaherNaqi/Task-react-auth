@@ -1,8 +1,8 @@
 import { Modal, Button, Form } from "react-bootstrap";
 import React, { useState } from "react";
 import authStore from "../stores/authStore";
-
-function SignUpModal() {
+import { observer } from "mobx-react-lite";
+function SignInModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState({ username: "", password: "" });
   const handleChange = (e) => {
@@ -12,19 +12,18 @@ function SignUpModal() {
     // to do : stop page from refreshing
     // call a function to sign up
     event.preventDefault();
-    authStore.signUp(user);
-    setUser({ username: "", password: "" });
+    authStore.signIn(user);
     setIsOpen(false);
   };
 
   return (
     <>
       <Button className="delete" onClick={() => setIsOpen(true)}>
-        Sign Up
+        Sign In
       </Button>
       <Modal centered show={isOpen} onHide={() => setIsOpen(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Sign up</Modal.Title>
+          <Modal.Title>Sign In</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
@@ -44,11 +43,12 @@ function SignUpModal() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleSubmit}>
-            Sign up
+            Sign In
           </Button>
         </Modal.Footer>
       </Modal>
+      {/* Hello {authStore.user ? authStore.user.username : ""} */}
     </>
   );
 }
-export default SignUpModal;
+export default observer(SignInModal);
